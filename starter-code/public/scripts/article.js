@@ -84,18 +84,18 @@ Article.allAuthors = () => {
 
 Article.numWordsByAuthor = () => {
   return Article.allAuthors().map( author => {
-    // TODO: Transform each author string into an object with properties for
+    // TODO: DONETransform each author string into an object with properties for
     // the author's name, as well as the total number of words across all articles
     // written by the specified author.
     return {
-      name: author, // TODO: Complete the value for this object property
+      name: author, // TODO: DONE Complete the value for this object property
       numWords: Article.all
         .filter( function(article){
           return article.author === author
         })
         .map( (article) => $(article.body).text().split(' ').length)
         .reduce( (a, b) => a + b, 0)
-              // .map().reduce() // TODO: Complete these three FP methods.
+              // .map().reduce() // TODO: DONEComplete these three FP methods.
     }
   })
 };
