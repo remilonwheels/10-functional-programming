@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Wrap the entire contents of this file in an IIFE.
+// DONE: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
 
 (function(module) {
@@ -112,8 +112,9 @@
   };
 
   articleView.initAdminPage = function() {
+    console.log('in initAdmin');
     // DONE: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
-    var source = $('#article-template').html();
+    var source = $('#author-stats-template').html();
     var template = Handlebars.compile(source);
 
     // REVIEW: We use `forEach` here because we are relying on the side-effects of the callback function:

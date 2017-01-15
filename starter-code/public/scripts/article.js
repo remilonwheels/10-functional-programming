@@ -2,9 +2,9 @@
 
 // REVIEW: Check out all of the functions that we've cleaned up with arrow function syntax.
 
-// TODO: Wrap the entire contents of this file in an IIFE.
+// DONE: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
-
+(function(module) {
 
 function Article(opts) {
   // REVIEW: Lets review what's actually happening here, and check out some new syntax!!
@@ -65,7 +65,7 @@ Article.fetchAll = callback => {
 // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
 Article.numWordsAll = () => {
   return Article.all
-      .map( (article) => $(article.body).text().split(' ').length)
+      .map( (article) => article.body.split(' ').length )
       .reduce( (a, b) => a + b, 0);
 };
 
@@ -75,27 +75,28 @@ Article.allAuthors = () => {
   return Article.all
       .map( author => author.author )
       .reduce( function(array, nextAuthorName) {
-        if ( array.indexOf(nextAuthorName) < 0 ) {
+        if ( array.indexOf(nextAuthorName) === -1 ) {
           array.push(nextAuthorName);
         }
         return array;
-      }, [] );
+      }, [] )
 };
 
 Article.numWordsByAuthor = () => {
   return Article.allAuthors().map( author => {
-    // TODO: DONETransform each author string into an object with properties for
+    // DONE: Transform each author string into an object with properties for
     // the author's name, as well as the total number of words across all articles
     // written by the specified author.
     return {
-      name: author, // TODO: DONE Complete the value for this object property
+      name: author, // DONE: Complete the value for this object property
       numWords: Article.all
         .filter( function(article){
+          console.log('in filter');
           return article.author === author
         })
-        .map( (article) => $(article.body).text().split(' ').length)
+        .map( (article) => article.body.split(' ').length )
         .reduce( (a, b) => a + b, 0)
-              // .map().reduce() // TODO: DONEComplete these three FP methods.
+              // .map().reduce() // DONE: Complete these three FP methods.
     }
   })
 };
@@ -142,3 +143,7 @@ Article.prototype.updateRecord = function(callback) {
     .then(console.log)
     .then(callback);
 };
+
+module.Article = Article;
+
+}(window));
